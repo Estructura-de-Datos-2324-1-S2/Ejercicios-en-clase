@@ -8,7 +8,7 @@ package listas;
  *
  * @author Estudiante
  */
-public class Lista {
+public class Lista implements ILista {
     
     private Nodo head;
     private int length;
@@ -85,6 +85,66 @@ public class Lista {
                 insertFinal(element);
             } else {
                 System.out.println("Index not valid");
+            }
+        }
+    }
+    
+    public Nodo deleteBegin() {
+        if(isEmpty()) {
+            System.out.println("La lista esta vacia");
+            return null;
+        } else {
+            Nodo pointer = getHead();
+            setHead(pointer.getNext());
+            pointer.setNext(null);
+            length--;
+            return pointer;
+        }
+    }
+    
+    public Nodo deleteFinal() {
+        if(isEmpty()) {
+            System.out.println("La lista esta vacia");
+            return null;
+        } else {
+            Nodo pointer = getHead();
+            while (pointer.getNext().getNext() != null) {
+                pointer = pointer.getNext();
+            }
+            Nodo temp = pointer.getNext();
+            pointer.setNext(null);
+            length--;
+            return temp;
+        }
+    }
+    
+    
+    public Nodo deleteAtIndex(int index) {
+        if(isEmpty()) {
+            System.out.println("La lista esta vacia");
+            return null;
+        } else {
+            if (index == 0){
+            return deleteBegin();
+            } else {
+                if (index < getLength()) {
+                    Nodo pointer = getHead();
+                    int cont = 0;
+                    while (cont < index - 1) {
+                        pointer = pointer.getNext();
+                        cont++;
+                    }
+                    Nodo temp = pointer.getNext();
+                    pointer.setNext(temp.getNext());
+                    temp.setNext(null);
+                    length--;
+                    return temp;
+                } else if (index == getLength()) {
+                    return deleteFinal();
+                } else {
+                    System.out.println("Index not valid");
+                    return null;
+                }
             }
         }
     }

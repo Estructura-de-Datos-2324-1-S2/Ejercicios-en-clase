@@ -19,7 +19,24 @@ public class Main {
             list.insertFinal(i);
         }
         list.insertAtIndex(84, 3);
+        System.out.println("Antes");
         list.print();
+        System.out.println("");
+        System.out.println("Despues");
+        list.deleteAtIndex(3);
+        list.deleteBegin();
+        list.deleteFinal();
+        list.print();
+        System.out.println("");
+        System.out.println("********************************");
+        ListaArray listArray = new ListaArray(10);
+        for (int i = 0; i < 10; i++) {
+            listArray.insertBegin(i);
+        }
+        listArray.print();
+        System.out.println("");
+        System.out.println("Memoria");
+        listArray.printInMemory();
     }
     
 }
