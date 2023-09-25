@@ -97,11 +97,66 @@ public class ListaArray implements ILista {
 
     @Override
     public void insertAtIndex(Object element, int index) {
+        NodoArray nodo = new NodoArray(element);
+        if (isEmpty()) {
+            insertBegin(element);
+        } else {
+            if(getSize() == getMaxSize()) {
+                System.out.println("El maximo tamaño ya fue alcanzado");
+            } else {
+                if(index <= getArray().length) {
+                    int position = searchSpace();
+                    if (position != -1) {
+                        getArray()[position] = nodo;
+                        int cont = 0;
+                        int pointer = getHead();
+                        while (cont < index -1) {
+                            pointer = getArray()[pointer].getNext();
+                            cont++;
+                        }
+                        int temp = getArray()[pointer].getNext();
+                        getArray()[pointer].setNext(position);
+                        getArray()[position].setNext(temp);
+                    } else {
+                        NodoArray[] newArray = new NodoArray[getSize() + 1];
+                        for (int i = 0; i < getSize(); i++) {
+                            newArray[i] = getArray()[i];
+                        }
+                        newArray[newArray.length - 1] = nodo;
+                        setArray(newArray);
+                        int cont = 0;
+                        int pointer = getHead();
+                        while (cont < index -1) {
+                            pointer = getArray()[pointer].getNext();
+                            cont++;
+                        }
+                        int temp = getArray()[pointer].getNext();
+                        getArray()[pointer].setNext(newArray.length - 1);
+                        getArray()[newArray.length - 1].setNext(temp);
+                        size++;
+                    }
+                } else {
+                    System.out.println("Invalid index");
+                }
+            }
+            
+        }
         
     }
 
     @Override
     public NodoArray deleteBegin() {
+        if(isEmpty()) {
+            System.out.println("The list is empty");
+        } else {
+            NodoArray pointer = getArray()[getHead()];
+            Integer temp = pointer.getNext();
+            getArray()[getHead()] = null;
+            setHead(temp);
+            pointer.setNext(null);
+            size--; 
+            return pointer;
+        }
         return null;
     }
 

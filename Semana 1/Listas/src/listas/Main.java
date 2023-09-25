@@ -29,14 +29,19 @@ public class Main {
         list.print();
         System.out.println("");
         System.out.println("********************************");
-        ListaArray listArray = new ListaArray(10);
+        ListaArray listArray = new ListaArray(12);
         for (int i = 0; i < 10; i++) {
             listArray.insertBegin(i);
         }
+        listArray.insertAtIndex(84, 3);
         listArray.print();
         System.out.println("");
-        System.out.println("Memoria");
-        listArray.printInMemory();
+        System.out.println("DELETE");
+        /*System.out.println("Memoria");
+        listArray.printInMemory();*/
+        listArray.deleteBegin();
+        listArray.insertAtIndex(100, 1);
+        listArray.print();
     }
     
 }
